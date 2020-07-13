@@ -1,6 +1,6 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { authConstant } from './constants';
+import { authConstant } from './interceptor-constants';
 import { url } from 'inspector';
 
 

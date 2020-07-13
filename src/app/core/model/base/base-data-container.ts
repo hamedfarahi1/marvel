@@ -1,6 +1,6 @@
-import { IBaseModel } from './base-model';
+import { ModelBase } from './mode-base';
 
-export interface IBaseDataContainer<T extends IBaseModel> {
+export interface IBaseDataContainer<T extends ModelBase> {
     offset?: number;
     limit?: number;
     total?: number;

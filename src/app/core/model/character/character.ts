@@ -1,14 +1,14 @@
-import { IBaseModel } from '../base/base-model';
-import { IImage } from '../image/image';
-import { IComicList } from '../comic/comic';
-import { IStoryList } from '../story/story';
-import { ISeriesList } from '../series/series';
-import { IBaseSummary } from '../base/base-summary';
-import { IBaseList } from '../base/base-list';
-import { IEventList } from '../event/event';
-import { IUrl } from '../url/url';
+import { ModelBase } from '@core/model/base/mode-base';
+import { IImage } from '@core/model/image/image';
+import { IComicList } from '@core/model/comic/comic';
+import { IStoryList } from '@core/model/story/story';
+import { ISeriesList } from '@core/model/series/series';
+import { IBaseSummary } from '@core/model/base/base-summary';
+import { IBaseList } from '@core/model/base/base-list';
+import { IEventList } from '@core/model/event/event';
+import { IUrl } from '@core/model/url/url';
 
-export interface ICharacter extends IBaseModel{
+export interface ICharacter extends ModelBase{
     name?: string;
     description?: string;
     thumbnail?: IImage;

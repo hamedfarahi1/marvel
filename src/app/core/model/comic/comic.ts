@@ -1,6 +1,6 @@
 import { IBaseList } from '../base/base-list';
 import { IBaseSummary } from '../base/base-summary';
-import { IBaseModel } from '../base/base-model';
+import { ModelBase } from '../base/mode-base';
 import { ITextObject } from '../text-object/TextObject';
 import { ISeriesSummary, ISeriesList } from '../series/series';
 import { IImage } from '../image/image';
@@ -10,7 +10,7 @@ import { ICreatorList } from '../creators/creator';
 import { IEventList } from '../event/event';
 import { IUrl } from '../url/url';
 
-export interface IComic extends IBaseModel {
+export interface IComic extends ModelBase {
     digitalId?: number;
     title?: string;
     issueNumber?: number;

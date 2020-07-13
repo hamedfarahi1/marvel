@@ -1,6 +1,6 @@
 import { IBaseList } from '../base/base-list';
 import { IBaseSummary } from '../base/base-summary';
-import { IBaseModel } from '../base/base-model';
+import { ModelBase } from '../base/mode-base';
 import { IImage } from '../image/image';
 import { IComicList } from '../comic/comic';
 import { IStoryList } from '../story/story';
@@ -10,7 +10,7 @@ import { ICreatorList } from '../creators/creator';
 import { IUrl } from '../url/url';
 
 
-export interface IEvent extends IBaseModel {
+export interface IEvent extends ModelBase {
     title?: string;
     description?: string;
     start?: Date;

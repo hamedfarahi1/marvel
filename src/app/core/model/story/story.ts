@@ -1,6 +1,6 @@
 import { IBaseList } from '../base/base-list';
 import { IBaseSummary } from '../base/base-summary';
-import { IBaseModel } from '../base/base-model';
+import { ModelBase } from '../base/mode-base';
 import { ISeriesList, ISeries } from '../series/series';
 import { ICreatorList } from '../creators/creator';
 import { IComicSummary, IComicList } from '../comic/comic';
@@ -9,7 +9,7 @@ import { IImage } from '../image/image';
 import { IEventList } from '../event/event';
 import { IUrl } from '../url/url';
 
-export interface IStory extends IBaseModel {
+export interface IStory extends ModelBase {
     title?: string;
     description?: string;
     type?: string;

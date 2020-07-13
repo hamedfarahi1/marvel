@@ -1,7 +1,7 @@
 import { IEventList } from '../event/event';
 import { IUrl } from '../url/url';
 
-export interface IBaseModel {
+export interface ModelBase {
     readonly entityName: string;
 	readonly validators: {};
     toString(): string;
