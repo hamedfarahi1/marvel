@@ -1,7 +1,13 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
+        
+    // set custom module path short
+    "baseUrl": "src",
+    "paths": {
+      "@shared/*": ["app/shared/*"],
+      "@core/*": ["app/core/*"]
+    },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
