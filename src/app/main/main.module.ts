@@ -8,14 +8,19 @@ import { StoreModule } from '@ngrx/store';
 import { filterReducer } from '@core/filter-managment/filter.reducer';
 import { DetailDialogComponent } from './detail-dialog/detail-dialog.component';
 import { FilterComponent } from './filter/filter.component';
+import { savingReducer } from '@core/saving-managment/save.reducer';
+import { SavedViewComponent } from './saved-view/saved-view.component';
 
 @NgModule({
-  declarations: [MainComponent, DetailDialogComponent, FilterComponent],
+  declarations: [MainComponent, DetailDialogComponent, FilterComponent, SavedViewComponent],
   imports: [
     CommonModule,
     MainRoutingModule,
     SharedModule,
-    StoreModule.forRoot({ state: filterReducer})
+    StoreModule.forRoot({ 
+      state: filterReducer,
+      saveState: savingReducer
+    })
   ],
   entryComponents: [DetailDialogComponent]
 })

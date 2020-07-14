@@ -1,0 +1,29 @@
+<h3 *ngIf="(saveState_ | async).length === 0"> no save items</h3>
+<div class="container"> 
+ <mat-grid-list cols="3" rowHeight="600px" > 
+   <mat-grid-tile 
+   *ngFor="let tile of saveState_ | async"
+   [colspan]="1"
+   [rowspan]="1">
+   <mat-card (click)="onItemClick(tile.id)" class = "tp-card">
+     <mat-card-header>
+     <div mat-card-avatar class = "tp-header-image"></div>
+        <mat-card-title>{{ tile.name }}</mat-card-title>
+        <mat-card-subtitle>{{ tile.modified }}</mat-card-subtitle>
+     </mat-card-header>
+     <img  mat-card-image class="backImg" src = "{{tile.thumbnail.path + '.' + tile.thumbnail.extension}}" alt = "Marvel">
+     <mat-card-content>
+        <p>
+           {{tile.description}}
+        </p>
+     </mat-card-content>
+     <mat-card-actions>
+      <button (click)="unSave(tile.id)" color="secondary" mat-button>
+        <mat-icon aria-hidden="false" aria-label=" save icon">delete</mat-icon>
+        undo save
+      </button>
+     </mat-card-actions>
+  </mat-card>
+ </mat-grid-tile>
+ </mat-grid-list>
+</div>

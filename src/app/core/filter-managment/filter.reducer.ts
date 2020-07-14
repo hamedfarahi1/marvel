@@ -1,4 +1,3 @@
-import { Action } from '@ngrx/store';
 import { ActionTypes, ActionsUnion } from './filter.actions';
 import { IState } from './state-model';
  

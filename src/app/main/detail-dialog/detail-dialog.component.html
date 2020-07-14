@@ -1,6 +1,10 @@
 <div mat-dialog-header class="header">
+  <button [disabled]="isSaved" (click)="onSave()" color="secondary" mat-button>
+    <mat-icon aria-hidden="false" aria-label=" save icon">save</mat-icon>
+    {{ isSaved ? 'saved' : 'save'}}
+  </button>
   <button color="secondary" mat-button mat-dialog-close >
-    <mat-icon aria-hidden="false" aria-label="Example home icon">close</mat-icon>
+    <mat-icon aria-hidden="false" aria-label=" close icon">close</mat-icon>
     Close
   </button>
 </div>

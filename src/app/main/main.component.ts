@@ -9,6 +9,7 @@ import { SetPage, ReturnFilters } from '@core/filter-managment/filter.actions';
 import { KeyValue } from '@angular/common';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { DetailDialogComponent } from './detail-dialog/detail-dialog.component';
+import { isPresent } from '@core/typings/optional';
 
 @Component({
   selector: 'app-main',
@@ -96,7 +97,9 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.stateObs.unsubscribe();
-    this.resultObs.unsubscribe();
+    if (isPresent(this.stateObs))
+      this.stateObs.unsubscribe();
+    if (isPresent(this.resultObs))
+      this.resultObs.unsubscribe();
   }
 }

@@ -2,7 +2,7 @@ import { Action } from '@ngrx/store';
 import { KeyValue } from '@angular/common';
  
 export enum ActionTypes {
-  SetPage = '[Filter Component] Set',
+  SetPage = '[Filter Component] Set Page',
   SetFilters = '[Filter Component] Set Filters',
   ReturnFilters = '[Filter Component] Return',
 }

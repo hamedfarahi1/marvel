@@ -1,12 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { IState } from '@core/filter-managment/state-model';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { SetFilters, ReturnFilters } from '@core/filter-managment/filter.actions';
 import { KeyValue } from '@angular/common';
 import { debounceTime, startWith, map } from 'rxjs/operators';
 import { Observable, of, Subscription } from 'rxjs';
 import { CharacterService } from '@core/service/character/character.service';
+import { isPresent } from '@core/typings/optional';
 
 @Component({
   selector: 'app-filter',
@@ -16,7 +17,7 @@ import { CharacterService } from '@core/service/character/character.service';
 export class FilterComponent implements OnInit, OnDestroy {
 
   // input form control for character's name
-  name = new FormControl();
+  name = new FormControl('');
 
   // array of character api filter params (Ex. name, nameStartsWith ...)
   filters: KeyValue<string, string>[];
@@ -28,11 +29,15 @@ export class FilterComponent implements OnInit, OnDestroy {
   options: string[] = [];
   filteredOptions: Observable<string[]>;
 
+  state_: Observable<IState>;
+
   // subscribtions props only for unsubscribe in ngOnDestroy
   charObs: Subscription;
   crtObs: Subscription;
 
-  constructor(private characterService:CharacterService, private store: Store<{state: IState}>) {}
+  constructor(private characterService:CharacterService, private store: Store<{state: IState}>) {
+    this.state_ = store.pipe(select('state'))
+  }
 
   // apply filters in store and get new data
   setFilters() {
@@ -52,6 +57,7 @@ export class FilterComponent implements OnInit, OnDestroy {
     /* listener for name formControl value changes and get new options for auto compelete
     set 500 ms debounceTime
     */ 
+    this.getInitialValue();
     this.crtObs = this.name.valueChanges.pipe(debounceTime(500)).subscribe(val => {
       // check input value undefined for return to filter initial state
       if (val.length === 0 || val === undefined) {
@@ -101,8 +107,17 @@ export class FilterComponent implements OnInit, OnDestroy {
     this.setFilters();
   }
 
+  getInitialValue() {
+    this.state_.subscribe(res => {
+      if (isPresent(res.filter) && res.filter !== null && res.filter.length === 1 && res.filter[0].key === 'name')
+        this.name.setValue(res.filter[0].value)
+    })
+  }
+
   ngOnDestroy() {
-    this.charObs.unsubscribe();
-    this.crtObs.unsubscribe();
+    if (isPresent(this.charObs))
+      this.charObs.unsubscribe();
+    if (isPresent(this.crtObs))
+      this.crtObs.unsubscribe();
   }
 }

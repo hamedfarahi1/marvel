@@ -1,8 +1,11 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { CharacterService } from '@core/service/character/character.service';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { ICharacter } from '@core/model/character/character';
 import { MatDialogRef } from '@angular/material';
+import { Store, select } from '@ngrx/store';
+import { SaveCharacter } from '@core/saving-managment/save.actions';
+import { isPresent } from '@core/typings/optional';
 
 @Component({
   selector: 'app-detail-dialog',
@@ -18,8 +21,16 @@ export class DetailDialogComponent implements OnInit, OnDestroy {
   // subscribtions props only for unsubscribe in ngOnDestroy
   resultObs: Subscription;
 
+  isSaved: boolean = false;
+  saveState_: Observable<ICharacter[]>;
   item: ICharacter;
-  constructor(private characterService: CharacterService,private dialogRef: MatDialogRef<DetailDialogComponent>) { }
+  stateObs: Subscription;
+  constructor(
+    private store: Store<{saveState: ICharacter[]}>,
+    private characterService: CharacterService,
+    private dialogRef: MatDialogRef<DetailDialogComponent>) {
+      this.saveState_ = store.pipe(select('saveState'));
+    }
 
   ngOnInit() {
     this.init();
@@ -30,6 +41,9 @@ export class DetailDialogComponent implements OnInit, OnDestroy {
       left: '16px'
     })
     this.getItem();
+    this.stateObs = this.saveState_.subscribe(items => {
+      items.forEach(itm => { if(itm.id === this.id) this.isSaved = true})
+    })
   }
   getItem() {
     this.isLoading = true;
@@ -46,8 +60,14 @@ export class DetailDialogComponent implements OnInit, OnDestroy {
     return st.substr(0,40)+ '  ...';
   }
 
-  ngOnDestroy() {
-    this.resultObs.unsubscribe();
+  onSave() {
+    this.store.dispatch(new SaveCharacter(this.item));
   }
 
+  ngOnDestroy() {
+    if (isPresent(this.resultObs))
+      this.resultObs.unsubscribe();
+    if (isPresent(this.stateObs))
+      this.stateObs.unsubscribe();
+  }
 }

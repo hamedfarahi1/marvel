@@ -1,3 +1,10 @@
+   <mat-toolbar style="display: flex; justify-content: space-between;">
+    <button [routerLink]="['saved-view']" mat-icon-button aria-label=" icon-button with list icon">
+     <mat-icon>list</mat-icon>
+     Saved Items
+   </button>
+   <span>Marvel App</span>
+ </mat-toolbar>
 <div class="container" [appLoading]="isLoading"> 
    <app-filter></app-filter>
   <mat-grid-list cols="3" rowHeight="600px" > 
