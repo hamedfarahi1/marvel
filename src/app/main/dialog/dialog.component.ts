@@ -8,7 +8,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 })
 export class DialogComponent implements OnInit, OnDestroy {
 
-  @ViewChild('target', { read: ViewContainerRef }) vcRef: ViewContainerRef;
+  @ViewChild('target', { read: ViewContainerRef, static: true }) vcRef: ViewContainerRef;
 
   componentRef: ComponentRef<any>;
 
