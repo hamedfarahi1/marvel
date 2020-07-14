@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedLibModule } from './shared-lib/shared-lib.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedCommonModule } from './shared-common/shared-common.module';
 
 /* 				*** SHARED MODULE (from angular.io) ***
  * SharedModule is a conventional name for an NgModule with the components, directives,
@@ -17,13 +18,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
 	declarations: [],
 	imports: [
-		CommonModule,
-		SharedLibModule
+		CommonModule
 	],
 	exports: [
 		FormsModule,
 		ReactiveFormsModule,
-		SharedLibModule
+		SharedLibModule,
+		SharedCommonModule
 		]
 })
 export class SharedModule { }
