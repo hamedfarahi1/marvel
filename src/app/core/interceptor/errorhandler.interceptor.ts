@@ -1,10 +1,11 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
 
 export class ErrorHandlerInterceptor implements HttpInterceptor {
 	constructor(
-		// rememmber add toastr service
+	 private toastr: ToastrService
 	) {
 	}
 

@@ -1,7 +1,6 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { authConstant } from './interceptor-constants';
-import { url } from 'inspector';
 
 
 export class AuthInterceptor implements HttpInterceptor {
@@ -17,7 +16,7 @@ export class AuthInterceptor implements HttpInterceptor {
 		const hash = authConstant.hash;
 		if (!!apyKey && !!hash) {
 			request = request.clone({
-				url: `${url}&apyKey=${apyKey}&hash=${hash}`
+				url: `${request.url}&apyKey=${apyKey}&hash=${hash}`
 			});
 		}
 		return next.handle(request);
