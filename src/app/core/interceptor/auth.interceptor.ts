@@ -1,8 +1,10 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { authConstant } from './interceptor-constants';
+import { Injectable } from "@angular/core";
 
 
+@Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 	constructor() { }
 
