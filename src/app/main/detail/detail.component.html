@@ -1,15 +1,5 @@
-<div mat-dialog-header class="header">
-  <button [disabled]="isSaved" (click)="onSave()" color="secondary" mat-button>
-    <mat-icon aria-hidden="false" aria-label=" save icon">save</mat-icon>
-    {{ isSaved ? 'saved' : 'save'}}
-  </button>
-  <button color="secondary" mat-button mat-dialog-close >
-    <mat-icon aria-hidden="false" aria-label=" close icon">close</mat-icon>
-    Close
-  </button>
-</div>
 <div  [appLoading]="isLoading"></div>
-<mat-card style="overflow-y: auto; max-height:600px;" *ngIf="item" class = "tp-card">
+<mat-card *ngIf="item" class = "tp-card">
   <mat-card-header>
   <div mat-card-avatar class = "tp-header-image"></div>
      <mat-card-title>{{ item.name }}</mat-card-title>
@@ -61,3 +51,7 @@
     </mat-list>
   </mat-card-content>
 </mat-card>
+<button [disabled]="isSaved" (click)="onSave()" color="secondary" mat-button>
+  <mat-icon aria-hidden="false" aria-label=" save icon">save</mat-icon>
+  {{ isSaved ? 'saved' : 'save'}}
+</button>

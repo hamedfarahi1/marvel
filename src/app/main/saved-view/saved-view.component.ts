@@ -3,9 +3,10 @@ import { Store, select } from '@ngrx/store';
 import { ICharacter } from '@core/model/character/character';
 import { Observable, Subscription } from 'rxjs';
 import { MatDialog, MatDialogConfig } from '@angular/material';
-import { DetailDialogComponent } from '../detail-dialog/detail-dialog.component';
 import { isPresent } from '@core/typings/optional';
 import { UnsaveCharacter } from '@core/saving-managment/save.actions';
+import { DialogComponent } from '../dialog/dialog.component';
+import { DetailComponent } from '../detail/detail.component';
 
 @Component({
   selector: 'app-saved-view',
@@ -26,10 +27,13 @@ export class SavedViewComponent implements OnInit, OnDestroy {
 
   onItemClick(id: number) {
     const config: MatDialogConfig = {
-      disableClose: true
+      disableClose: true,
+      data:{
+        component: DetailComponent,
+        id: id
+      }
     }
-    const dialog = this.matDialog.open(DetailDialogComponent, config);
-    dialog.componentInstance.id = id;
+    this.matDialog.open(DialogComponent, config);
   }
 
   unSave(id: number) {

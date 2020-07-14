@@ -6,13 +6,14 @@ import { MainComponent } from './main.component';
 import { SharedModule } from '@shared/shared.module';
 import { StoreModule } from '@ngrx/store';
 import { filterReducer } from '@core/filter-managment/filter.reducer';
-import { DetailDialogComponent } from './detail-dialog/detail-dialog.component';
 import { FilterComponent } from './filter/filter.component';
 import { savingReducer } from '@core/saving-managment/save.reducer';
 import { SavedViewComponent } from './saved-view/saved-view.component';
+import { DetailComponent } from './detail/detail.component';
+import { DialogComponent } from './dialog/dialog.component';
 
 @NgModule({
-  declarations: [MainComponent, DetailDialogComponent, FilterComponent, SavedViewComponent],
+  declarations: [MainComponent, DetailComponent, FilterComponent, SavedViewComponent, DialogComponent],
   imports: [
     CommonModule,
     MainRoutingModule,
@@ -22,6 +23,6 @@ import { SavedViewComponent } from './saved-view/saved-view.component';
       saveState: savingReducer
     })
   ],
-  entryComponents: [DetailDialogComponent]
+  entryComponents: [DialogComponent, DetailComponent]
 })
 export class MainModule { }

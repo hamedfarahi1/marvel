@@ -2,17 +2,16 @@ import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { CharacterService } from '@core/service/character/character.service';
 import { Subscription, Observable } from 'rxjs';
 import { ICharacter } from '@core/model/character/character';
-import { MatDialogRef } from '@angular/material';
 import { Store, select } from '@ngrx/store';
 import { SaveCharacter } from '@core/saving-managment/save.actions';
 import { isPresent } from '@core/typings/optional';
 
 @Component({
   selector: 'app-detail-dialog',
-  templateUrl: './detail-dialog.component.html',
-  styleUrls: ['./detail-dialog.component.scss']
+  templateUrl: './detail.component.html',
+  styleUrls: ['./detail.component.scss']
 })
-export class DetailDialogComponent implements OnInit, OnDestroy {
+export class DetailComponent implements OnInit, OnDestroy {
 
   @Input()
   id: number;
@@ -27,8 +26,7 @@ export class DetailDialogComponent implements OnInit, OnDestroy {
   stateObs: Subscription;
   constructor(
     private store: Store<{saveState: ICharacter[]}>,
-    private characterService: CharacterService,
-    private dialogRef: MatDialogRef<DetailDialogComponent>) {
+    private characterService: CharacterService) {
       this.saveState_ = store.pipe(select('saveState'));
     }
 
@@ -37,9 +35,6 @@ export class DetailDialogComponent implements OnInit, OnDestroy {
   }
 
   init() {
-    this.dialogRef.updatePosition({
-      left: '16px'
-    })
     this.getItem();
     this.stateObs = this.saveState_.subscribe(items => {
       items.forEach(itm => { if(itm.id === this.id) this.isSaved = true})

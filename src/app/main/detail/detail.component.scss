@@ -1,5 +1,7 @@
 .tp-card {
     width: 600px;
+    max-height: 500px;
+    overflow-y: auto;
  }
  .tp-header-image {
     background-size: cover;
@@ -7,10 +9,4 @@
 
  .backImg {
     width: 300px;
-}
-
-.header {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
 }
