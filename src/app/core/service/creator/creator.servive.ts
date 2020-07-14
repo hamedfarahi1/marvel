@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 import { MainModule } from 'app/main/main.module';
 
 @Injectable({
-    providedIn: MainModule
+    providedIn: 'root'
 })
 export class CreatorService extends CoreServiceBase<ICreator, ICreatorDataContainer, ICreatorDataWrapper>{
     constructor(http: HttpClient) {

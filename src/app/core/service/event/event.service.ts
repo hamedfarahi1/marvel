@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 import { MainModule } from 'app/main/main.module';
 
 @Injectable({
-    providedIn: MainModule
+    providedIn: 'root'
 })
 export class EventService extends CoreServiceBase<IEvent, IEventDataContainer, IEventDataWrapper>{
     constructor(http: HttpClient) {

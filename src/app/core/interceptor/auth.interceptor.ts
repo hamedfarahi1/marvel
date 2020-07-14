@@ -8,7 +8,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
 	// tslint:disable-next-line:no-any
 	intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-		if (!request || !request.url || (/^http/.test(request.url))) {
+		if (!request || !request.url) {
 			return next.handle(request);
 		}
 
@@ -16,7 +16,16 @@ export class AuthInterceptor implements HttpInterceptor {
 		const hash = authConstant.hash;
 		if (!!apyKey && !!hash) {
 			request = request.clone({
-				url: `${request.url}&apyKey=${apyKey}&hash=${hash}`
+				setHeaders: {
+					'Accept': '*/*'
+				},
+				setParams: {
+					'apikey': apyKey,
+					'hash': hash,
+					// just for this project
+					'ts': '1565922410'
+					
+				}
 			});
 		}
 		return next.handle(request);

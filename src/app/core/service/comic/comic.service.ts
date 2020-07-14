@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 import { MainModule } from 'app/main/main.module';
 
 @Injectable({
-    providedIn: MainModule
+    providedIn: 'root'
 })
 export class ComicService extends CoreServiceBase<IComic, IComicDataContainer, IComicDataWrapper>{
     constructor(http: HttpClient) {

@@ -10,11 +10,12 @@ import { Optional, isPresent } from '@core/typings/optional';
 import { IBaseDataContainer } from '@core/model/base/base-data-container';
 
 export abstract class CoreServiceBase<T extends ModelBase, Container extends IBaseDataContainer<T>, Wrapper extends IBaseDataWrapper<T, Container>> {
-	protected constructor(protected resourceUrl: string, protected http: HttpClient) {
+    public baseUrl:string = 'http://gateway.marvel.com/v1/public/'
+	protected constructor(protected resourceName: string, protected http: HttpClient) {
     }
     
     public find(id: number): Observable<Wrapper> {
-		return this.http.get<Wrapper>(`${this.resourceUrl}/${id}`);
+		return this.http.get<Wrapper>(`${this.baseUrl + this.resourceName}/${id}`);
 	}
     public read(page: number, pageSize: number, orderBy: string, filter: KeyValue<string, string>[], subProp?: SubProp): Observable<Wrapper> {
         const opt = <QueryParam>{
@@ -25,25 +26,28 @@ export abstract class CoreServiceBase<T extends ModelBase, Container extends IBa
         };
         if (isPresent(subProp))
 		    return this.query(opt, subProp).pipe(map(data => {
-		    	return <Wrapper>data.body;
+		    	return <Wrapper>data
             }));
         else 
             return this.query(opt).pipe(map(data => {
-			    return <Wrapper>data.body;
+			    return <Wrapper>data
          }));
 	}
 
 	public readAll(filter: KeyValue<string, string>[]): Observable<Wrapper> {
 		return this.query(<QueryParam>{
 			filter: filter
-		}).pipe(map((resp) => resp.body));
+		});
 	}
 
 
-    public query(req?: QueryParam, subProp?: SubProp): Observable<HttpResponse<Wrapper>> {
+    public query(req?: QueryParam, subProp?: SubProp): Observable<Wrapper> {
         const options = createRequestOption(req);
         if (isPresent(subProp))
-		    return this.http.get<Wrapper>(this.resourceUrl + `/${subProp.id}/${subProp.prop}`, { params: options, observe: 'response' });
+            return this.http.get<Wrapper>(this.baseUrl + this.resourceName + `/${subProp.id}/${subProp.prop}`, { params: options});
+        else
+            return this.http.get<Wrapper>(this.baseUrl + this.resourceName, { params: options});
+
 	}
 }
 
