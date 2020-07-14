@@ -9,6 +9,13 @@ import { map } from 'rxjs/operators';
 import { Optional, isPresent } from '@core/typings/optional';
 import { IBaseDataContainer } from '@core/model/base/base-data-container';
 
+/**
+ * this abstract class manage all resource crud (get only) and child services can overrides this methodes
+ * find function defined for get one resource by id
+ * read function for get filtered resources by offset, limit, orderBy, filter
+ * readAll ignored offset and limit params
+ * query function create a valid request
+ */
 export abstract class CoreServiceBase<T extends ModelBase, Container extends IBaseDataContainer<T>, Wrapper extends IBaseDataWrapper<T, Container>> {
     public baseUrl:string = 'http://gateway.marvel.com/v1/public/'
 	protected constructor(protected resourceName: string, protected http: HttpClient) {

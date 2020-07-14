@@ -4,8 +4,8 @@
     Close
   </button>
 </div>
-<div [appLoading]="isLoading"></div>
-<mat-card *ngIf="item" class = "tp-card">
+<div  [appLoading]="isLoading"></div>
+<mat-card style="overflow-y: auto; max-height:600px;" *ngIf="item" class = "tp-card">
   <mat-card-header>
   <div mat-card-avatar class = "tp-header-image"></div>
      <mat-card-title>{{ item.name }}</mat-card-title>
@@ -16,6 +16,8 @@
      <p>
         {{item.description}}
      </p>
+     <h3>Urls</h3>
+     <mat-divider></mat-divider>
      <mat-list>
        <ng-container *ngFor="let urlObj of item.urls">
         <mat-list-item >
@@ -26,5 +28,32 @@
         <mat-divider></mat-divider>
       </ng-container>
      </mat-list>
+     <h3>Comics</h3>
+     <mat-list>
+      <ng-container *ngFor="let comic of item.comics.items">
+       <mat-list-item >
+         <h5>{{ comic.name }}</h5>
+       </mat-list-item>
+       <mat-divider></mat-divider>
+     </ng-container>
+    </mat-list>
+    <h3>Series</h3>
+     <mat-list>
+      <ng-container *ngFor="let series of item.series.items">
+       <mat-list-item >
+         <h5>{{ series.name }}</h5>
+       </mat-list-item>
+       <mat-divider></mat-divider>
+     </ng-container>
+    </mat-list>
+    <h3>Stories</h3>
+     <mat-list>
+      <ng-container *ngFor="let story of item.stories.items">
+       <mat-list-item >
+         <h5>{{ story.name + "   (type: " + story.type + ")"}}</h5>
+       </mat-list-item>
+       <mat-divider></mat-divider>
+     </ng-container>
+    </mat-list>
   </mat-card-content>
 </mat-card>
