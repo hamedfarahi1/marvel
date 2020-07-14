@@ -1,11 +1,10 @@
 import { ComponentFactoryResolver, Directive, ElementRef, Input, Renderer2, ViewContainerRef } from '@angular/core';
 import { SpinnerComponent } from '../spinner-component/spinner.component';
-import { Optional, isPresent } from '@core/typings/optional';
 
 @Directive({
 	selector: '[appLoading]'
 })
-export class LoadingDirective<T> {
+export class LoadingDirective {
 	constructor(private viewContainerRef: ViewContainerRef,
 		private renderer: Renderer2,
 		private element: ElementRef,
@@ -25,8 +24,8 @@ export class LoadingDirective<T> {
 	}
 
 	@Input()
-	public set appLoading(deferredData: Optional<T>) {
-		if (isPresent(deferredData)) {
+	public set appLoading(isLoading: boolean) {
+		if (!isLoading) {
 			this.showContent();
 		} else {
 			this.showLoading();

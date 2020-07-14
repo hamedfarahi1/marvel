@@ -24,11 +24,15 @@ import { MainModule } from './main/main.module';
     ToastrModule.forRoot(),
   ],
   providers: [
+
+    // add auth props into each request that sent
 		{
 			provide: HTTP_INTERCEPTORS,
 			useClass: AuthInterceptor,
 			multi: true,
-		},
+    },
+    
+    // for handle error that recived from server
 		{
 			provide: HTTP_INTERCEPTORS,
 			useClass: ErrorHandlerInterceptor,

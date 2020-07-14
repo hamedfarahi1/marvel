@@ -17,14 +17,20 @@ import { DetailDialogComponent } from './detail-dialog/detail-dialog.component';
 })
 export class MainComponent implements OnInit, OnDestroy {
 
+  // array of characters
   items: ICharacter[];
   state_: Observable<IState>;
   filters: KeyValue<string, string>[];
-  totalCount: number;
 
+  isLoading: boolean = true;
+  // props for paginator's usage
+  totalCount: number;
   pageIndex: number;
+
+  // subscribtions props only for unsubscribe in ngOnDestroy
   stateObs: Subscription;
   resultObs: Subscription;
+
   constructor(
     private matDialog: MatDialog,
     private characterService: CharacterService, 
@@ -33,25 +39,55 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+
+    // listening to state changes
     this.stateObs = this.state_.subscribe(res=> {
       this.pageIndex = res.page / 3;
       this.resultObs = this.getData(res);
     })
   }
 
+  /**
+   * get list of characters that filters obj (res)
+   * @param res 
+   */
   getData(res: IState) {
     return this.characterService.read(res.page, res.pageSize, res.orderBy, res.filter).subscribe((res: ICreatorDataWrapper) => {
       this.totalCount = res.data.total;
-      this.items = res.data.results})
+      this.items = res.data.results
+      this.isLoading = false;
+    }, () => this.isLoading = false)
   }
 
+  /**
+   * short the string in 10 characters
+   * @param st 
+   */
   getSubtitle(st: string) {
     return st.substr(0, 10) + ' ...';
   }
 
-  
+  /**
+   * open dialog for view a character detail 
+   * @param id 
+   */
+  onItemClick(id: number) {
+    const config: MatDialogConfig = {
+      disableClose: true
+    }
+    const dialog = this.matDialog.open(DetailDialogComponent, config);
+    dialog.componentInstance.id = id;
+  }
+
+  /**
+   * set page that returned by paginator to state
+   * @param event 
+   */
   setPage(event) {
-    this.items = undefined;
+
+    // for destroy last items
+    this.isLoading = true;
+
     this.store.dispatch(new SetPage(event.pageIndex));
   }
 
@@ -63,13 +99,4 @@ export class MainComponent implements OnInit, OnDestroy {
     this.stateObs.unsubscribe();
     this.resultObs.unsubscribe();
   }
-
-  onItemClick(id: number) {
-    const config: MatDialogConfig = {
-      disableClose: true
-    }
-    const dialog = this.matDialog.open(DetailDialogComponent, config);
-    dialog.componentInstance.id = id;
-  }
-
 }

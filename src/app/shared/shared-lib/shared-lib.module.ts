@@ -6,7 +6,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './angular-material/angular-material.module';
 import { SharedCommonModule } from '@shared/shared-common/shared-common.module';
 
-
+/**
+ * this module defined for usual modules that are used in most modules in project
+ */
 @NgModule({
 	declarations: [],
 	imports: [

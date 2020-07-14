@@ -12,6 +12,7 @@ export class AuthInterceptor implements HttpInterceptor {
 			return next.handle(request);
 		}
 
+		// add api key and hash for requests
 		const apyKey = authConstant.apyKey;
 		const hash = authConstant.hash;
 		if (!!apyKey && !!hash) {
