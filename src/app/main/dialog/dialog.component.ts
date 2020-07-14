@@ -1,6 +1,5 @@
-import { Component, OnInit, Input, Inject, ComponentRef, ViewChild, ViewContainerRef, ComponentFactoryResolver, OnDestroy } from '@angular/core';
+import { Component, OnInit, Inject, ComponentRef, ViewChild, ViewContainerRef, ComponentFactoryResolver, OnDestroy } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { ComponentPortal } from '@angular/cdk/portal';
 
 @Component({
   selector: 'app-dialog',
