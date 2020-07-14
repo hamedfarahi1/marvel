@@ -19,7 +19,7 @@ export abstract class CoreServiceBase<T extends ModelBase, Container extends IBa
 	}
     public read(page: number, pageSize: number, orderBy: string, filter: KeyValue<string, string>[], subProp?: SubProp): Observable<Wrapper> {
         const opt = <QueryParam>{
-			offset: page - 1,
+			offset: page,
 			limit: pageSize,
 			orderBy: orderBy,
 			filter: filter

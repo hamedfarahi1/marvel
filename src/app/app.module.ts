@@ -22,7 +22,6 @@ import { MainModule } from './main/main.module';
     SharedModule,
     MainModule,
     ToastrModule.forRoot(),
-
   ],
   providers: [
 		{
