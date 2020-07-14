@@ -1,0 +1,30 @@
+<div mat-dialog-header class="header">
+  <button color="secondary" mat-button mat-dialog-close >
+    <mat-icon aria-hidden="false" aria-label="Example home icon">close</mat-icon>
+    Close
+  </button>
+</div>
+<div [appLoading]="item"></div>
+<mat-card *ngIf="item" class = "tp-card">
+  <mat-card-header>
+  <div mat-card-avatar class = "tp-header-image"></div>
+     <mat-card-title>{{ item.name }}</mat-card-title>
+     <mat-card-subtitle>{{ item.entityName }}</mat-card-subtitle>
+  </mat-card-header>
+  <img  mat-card-image class="backImg" src = "{{item.thumbnail.path + '.' + item.thumbnail.extension}}" alt = "Marvel">
+  <mat-card-content>
+     <p>
+        {{item.description}}
+     </p>
+     <mat-list>
+       <ng-container *ngFor="let urlObj of item.urls">
+        <mat-list-item >
+          <a href="{{urlObj.url}}" target="blank" matTooltip={{urlObj.url}}> 
+            {{ getShortedUrl(urlObj.url) + '    (type: ' + urlObj.type+')'}}
+          </a>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+      </ng-container>
+     </mat-list>
+  </mat-card-content>
+</mat-card>
