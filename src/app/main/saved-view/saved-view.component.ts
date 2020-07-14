@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { ICharacter } from '@core/model/character/character';
 import { Observable, Subscription } from 'rxjs';
-import { MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { isPresent } from '@core/typings/optional';
 import { UnsaveCharacter } from '@core/saving-managment/save.actions';
 import { DialogComponent } from '../dialog/dialog.component';

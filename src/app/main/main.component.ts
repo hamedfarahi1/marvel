@@ -7,7 +7,7 @@ import { Store, select } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { SetPage, ReturnFilters } from '@core/filter-managment/filter.actions';
 import { KeyValue } from '@angular/common';
-import { MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { isPresent } from '@core/typings/optional';
 import { DialogComponent } from './dialog/dialog.component';
 import { DetailComponent } from './detail/detail.component';
