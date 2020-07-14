@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './angular-material/angular-material.module';
+import { SharedCommonModule } from '@shared/shared-common/shared-common.module';
 
 
 @NgModule({
@@ -15,12 +16,13 @@ import { AngularMaterialModule } from './angular-material/angular-material.modul
 		FormsModule,
 		ReactiveFormsModule,
 		AngularMaterialModule
-
 	],
 	exports: [
 		BrowserAnimationsModule,
 		HttpClientModule,
-		AngularMaterialModule
+		AngularMaterialModule,
+		ReactiveFormsModule,
+		FormsModule
 	]
 })
 export class SharedLibModule { }
