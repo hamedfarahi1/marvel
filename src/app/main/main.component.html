@@ -1,10 +1,11 @@
-<div class="container"> 
-  <mat-grid-list cols="3" rowHeight="600px"> 
-    <mat-grid-tile
+<div class="container" [appLoading]="items"> 
+   <app-filter></app-filter>
+  <mat-grid-list cols="3" rowHeight="600px" > 
+    <mat-grid-tile 
     *ngFor="let tile of items"
     [colspan]="1"
     [rowspan]="1">
-    <mat-card class = "tp-card">
+    <mat-card (click)="onItemClick(tile.id)" class = "tp-card">
       <mat-card-header>
       <div mat-card-avatar class = "tp-header-image"></div>
          <mat-card-title>{{ tile.name }}</mat-card-title>
@@ -23,7 +24,5 @@
    </mat-card>
   </mat-grid-tile>
   </mat-grid-list>
-  <mat-grid-tile-footer>
-    <mat-paginator [length]="totalCount" [pageSize]="3" [pageSizeOptions]="[3]" (page)="setPage($event)"></mat-paginator>
-  </mat-grid-tile-footer>
 </div>
+<mat-paginator [pageIndex]="pageIndex" [length]="totalCount" [pageSize]="3" [pageSizeOptions]="[3]" (page)="setPage($event)"></mat-paginator>

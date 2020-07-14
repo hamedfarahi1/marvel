@@ -19,6 +19,7 @@ export function filterReducer(state = initialState, action: ActionsUnion) {
     case ActionTypes.SetFilters:
       return {
           ...state,
+          page: 0,
           filter: action.filters
       };
  

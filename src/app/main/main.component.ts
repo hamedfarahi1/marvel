@@ -5,8 +5,10 @@ import { ICharacter } from '@core/model/character/character';
 import { IState } from '@core/filter-managment/state-model';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { SetPage, ReturnFilters, SetFilters } from '@core/filter-managment/filter.actions';
+import { SetPage, ReturnFilters } from '@core/filter-managment/filter.actions';
 import { KeyValue } from '@angular/common';
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import { DetailDialogComponent } from './detail-dialog/detail-dialog.component';
 
 @Component({
   selector: 'app-main',
@@ -20,14 +22,19 @@ export class MainComponent implements OnInit, OnDestroy {
   filters: KeyValue<string, string>[];
   totalCount: number;
 
+  pageIndex: number;
   stateObs: Subscription;
   resultObs: Subscription;
-  constructor(private characterService: CharacterService, private store: Store<{state: IState}>) { 
+  constructor(
+    private matDialog: MatDialog,
+    private characterService: CharacterService, 
+    private store: Store<{state: IState}>) { 
     this.state_ = store.pipe(select('state'))
   }
 
   ngOnInit() {
     this.stateObs = this.state_.subscribe(res=> {
+      this.pageIndex = res.page / 3;
       this.resultObs = this.getData(res);
     })
   }
@@ -44,11 +51,8 @@ export class MainComponent implements OnInit, OnDestroy {
 
   
   setPage(event) {
+    this.items = undefined;
     this.store.dispatch(new SetPage(event.pageIndex));
-  }
-
-  setFilters() {
-    this.store.dispatch(new SetFilters(this.filters));
   }
 
   returnFilters() {
@@ -58,6 +62,14 @@ export class MainComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.stateObs.unsubscribe();
     this.resultObs.unsubscribe();
+  }
+
+  onItemClick(id: number) {
+    const config: MatDialogConfig = {
+      disableClose: true
+    }
+    const dialog = this.matDialog.open(DetailDialogComponent, config);
+    dialog.componentInstance.id = id;
   }
 
 }
