@@ -11,9 +11,10 @@ import { savingReducer } from '@core/saving-managment/save.reducer';
 import { SavedViewComponent } from './saved-view/saved-view.component';
 import { DetailComponent } from './detail/detail.component';
 import { DialogComponent } from './dialog/dialog.component';
+import { CardViewComponent } from './card-view/card-view.component';
 
 @NgModule({
-  declarations: [MainComponent, DetailComponent, FilterComponent, SavedViewComponent, DialogComponent],
+  declarations: [MainComponent, DetailComponent, FilterComponent, SavedViewComponent, DialogComponent, CardViewComponent],
   imports: [
     CommonModule,
     MainRoutingModule,

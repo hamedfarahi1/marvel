@@ -1,56 +1,5 @@
 <div></div>
-<mat-card *ngIf="item" class = "tp-card">
-  <mat-card-header>
-  <div mat-card-avatar class = "tp-header-image"></div>
-     <mat-card-title>{{ item.name }}</mat-card-title>
-     <mat-card-subtitle>{{ item.entityName }}</mat-card-subtitle>
-  </mat-card-header>
-  <img  mat-card-image class="backImg" src = "{{item.thumbnail.path + '.' + item.thumbnail.extension}}" alt = "Marvel">
-  <mat-card-content>
-     <p>
-        {{item.description}}
-     </p>
-     <h3>Urls</h3>
-     <mat-divider></mat-divider>
-     <mat-list>
-       <ng-container *ngFor="let urlObj of item.urls">
-        <mat-list-item >
-          <a href="{{urlObj.url}}" target="blank" matTooltip={{urlObj.url}}> 
-            {{ getShortedUrl(urlObj.url) + '    (type: ' + urlObj.type+')'}}
-          </a>
-        </mat-list-item>
-        <mat-divider></mat-divider>
-      </ng-container>
-     </mat-list>
-     <h3>Comics</h3>
-     <mat-list>
-      <ng-container *ngFor="let comic of item.comics.items">
-       <mat-list-item >
-         <h5>{{ comic.name }}</h5>
-       </mat-list-item>
-       <mat-divider></mat-divider>
-     </ng-container>
-    </mat-list>
-    <h3>Series</h3>
-     <mat-list>
-      <ng-container *ngFor="let series of item.series.items">
-       <mat-list-item >
-         <h5>{{ series.name }}</h5>
-       </mat-list-item>
-       <mat-divider></mat-divider>
-     </ng-container>
-    </mat-list>
-    <h3>Stories</h3>
-     <mat-list>
-      <ng-container *ngFor="let story of item.stories.items">
-       <mat-list-item >
-         <h5>{{ story.name + "   (type: " + story.type + ")"}}</h5>
-       </mat-list-item>
-       <mat-divider></mat-divider>
-     </ng-container>
-    </mat-list>
-  </mat-card-content>
-</mat-card>
+<app-card-view [item]="item" [detail]="true"></app-card-view>
 <button [disabled]="isSaved" (click)="onSave()" color="secondary" mat-button>
   <mat-icon aria-hidden="false" aria-label=" save icon">save</mat-icon>
   {{ isSaved ? 'saved' : 'save'}}

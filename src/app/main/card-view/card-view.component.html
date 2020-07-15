@@ -1,0 +1,64 @@
+<mat-card *ngIf="item" [ngClass]="detail ? 'tp-card-detail' : 'tp-card'">
+    <mat-card-header>
+    <div mat-card-avatar class = "tp-header-image"></div>
+       <mat-card-title>{{ item.name }}</mat-card-title>
+       <mat-card-subtitle>{{detail ? item.entityName : getSubtitle(item.description)}}</mat-card-subtitle>
+    </mat-card-header>
+    <img  mat-card-image [ngClass]="detail ? 'backImg-detail' : 'backImg'" src = "{{item.thumbnail.path + '.' + item.thumbnail.extension}}" alt = "Marvel">
+    <mat-card-content>
+        <p>
+           {{item.description}}
+        </p>
+        <ng-container *ngIf="detail">
+         <h3>Urls</h3>
+         <mat-divider></mat-divider>
+         <mat-list>
+           <ng-container *ngFor="let urlObj of item.urls">
+            <mat-list-item >
+              <a href="{{urlObj.url}}" target="blank" matTooltip={{urlObj.url}}> 
+                {{ getShortedUrl(urlObj.url) + '    (type: ' + urlObj.type+')'}}
+              </a>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+          </ng-container>
+         </mat-list>
+         <h3>Comics</h3>
+         <mat-list>
+          <ng-container *ngFor="let comic of item.comics.items">
+           <mat-list-item >
+             <h5>{{ comic.name }}</h5>
+           </mat-list-item>
+           <mat-divider></mat-divider>
+         </ng-container>
+        </mat-list>
+        <h3>Series</h3>
+         <mat-list>
+          <ng-container *ngFor="let series of item.series.items">
+           <mat-list-item >
+             <h5>{{ series.name }}</h5>
+           </mat-list-item>
+           <mat-divider></mat-divider>
+         </ng-container>
+        </mat-list>
+        <h3>Stories</h3>
+         <mat-list>
+          <ng-container *ngFor="let story of item.stories.items">
+           <mat-list-item >
+             <h5>{{ story.name + "   (type: " + story.type + ")"}}</h5>
+           </mat-list-item>
+           <mat-divider></mat-divider>
+         </ng-container>
+        </mat-list>
+        </ng-container>
+     </mat-card-content>
+     <mat-card-actions *ngIf="unsaveOption">
+        <button (click)="unSave(item.id, $event)" color="secondary" mat-button>
+            <mat-icon aria-hidden="false" aria-label=" save icon">delete</mat-icon>
+            undo save
+          </button>
+     </mat-card-actions>
+    <mat-card-actions *ngIf="!detail && !unsaveOption">
+       <button disabled mat-button>View</button>
+       <button disabled mat-button>SHARE</button>
+    </mat-card-actions>
+ </mat-card>

@@ -64,14 +64,6 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * short the string in 10 characters
-   * @param st 
-   */
-  getSubtitle(st: string) {
-    return st.substr(0, 10) + ' ...';
-  }
-
-  /**
    * open dialog for view a character detail 
    * @param id 
    */

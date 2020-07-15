@@ -57,14 +57,6 @@ describe('DetailComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should testing getSubStr func',fakeAsync(() => {
-    const gsu = spyOn(component, 'getShortedUrl')
-    .and.returnValue((st: string) => st.endsWith('...'))
-
-    component.getShortedUrl('jfwoiegweoigwnvueirbgeoigwheoifjwefwnioegnwefoiwvonwiegbw')
-    expect(gsu).toHaveBeenCalledTimes(1)
-  }))
-
   it('should be test getItem func', fakeAsync(() => {
     const gt = spyOn(component, 'getItem')
     .and

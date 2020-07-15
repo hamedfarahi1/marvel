@@ -4,26 +4,9 @@
    <mat-grid-tile 
    *ngFor="let tile of saveState_ | async"
    [colspan]="1"
-   [rowspan]="1">
-   <mat-card (click)="onItemClick(tile.id)" class = "tp-card">
-     <mat-card-header>
-     <div mat-card-avatar class = "tp-header-image"></div>
-        <mat-card-title>{{ tile.name }}</mat-card-title>
-        <mat-card-subtitle>{{ tile.modified }}</mat-card-subtitle>
-     </mat-card-header>
-     <img  mat-card-image class="backImg" src = "{{tile.thumbnail.path + '.' + tile.thumbnail.extension}}" alt = "Marvel">
-     <mat-card-content>
-        <p>
-           {{tile.description}}
-        </p>
-     </mat-card-content>
-     <mat-card-actions>
-      <button (click)="unSave(tile.id)" color="secondary" mat-button>
-        <mat-icon aria-hidden="false" aria-label=" save icon">delete</mat-icon>
-        undo save
-      </button>
-     </mat-card-actions>
-  </mat-card>
+   [rowspan]="1"
+   (click)="onItemClick(tile.id)">
+   <app-card-view [item]="tile" [unsaveOption]="true" (undoSave)="unSave($event)"></app-card-view>
  </mat-grid-tile>
  </mat-grid-list>
 </div>

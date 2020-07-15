@@ -24,7 +24,7 @@ export class DetailComponent implements OnInit, OnDestroy {
   saveState_: Observable<ICharacter[]>;
   item: ICharacter;
   stateObs: Subscription;
-  
+
   constructor(
     private store: Store<{saveState: ICharacter[]}>,
     private characterService: CharacterService) {
@@ -50,10 +50,6 @@ export class DetailComponent implements OnInit, OnDestroy {
         this.item = results[0];
       this.isLoading = false;
     }, () => this.isLoading = false)
-  }
-
-  getShortedUrl(st: string) {
-    return st.substr(0,40)+ '  ...';
   }
 
   onSave() {
