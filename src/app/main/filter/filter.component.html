@@ -1,13 +1,16 @@
 <div class="container">
-   <form>
+   <form style="width: 90%;">
     <mat-form-field style="width: 100%!important; padding-top: 40px; margin: auto;">
       <mat-label>Character Name</mat-label>
-      <input matInput placeholder="Ex. Iron Man" [formControl]="name" [matAutocomplete]="auto">
+      <input (keyup.enter)="getCharacter()" matInput placeholder="Ex. Iron Man" [formControl]="name" [matAutocomplete]="auto">
       <mat-autocomplete #auto="matAutocomplete">
-        <mat-option *ngFor="let option of filteredOptions | async" [value]="option" (click)="getCharacter($event)">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option" (click)="getCharacter()">
           {{option}}
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>
    </form>
+   <button mat-button (click)="returnFilters()">
+    <mat-icon>close</mat-icon>
+  </button>
 </div>

@@ -46,7 +46,9 @@ export class FilterComponent implements OnInit, OnDestroy {
 
   // return filters to initialState in store
   returnFilters() {
+    if(this.name.value.length === 0) return;
     this.store.dispatch(new ReturnFilters());
+    this.name.setValue('')
   }
 
   ngOnInit(): void {
@@ -59,6 +61,7 @@ export class FilterComponent implements OnInit, OnDestroy {
     */ 
     this.getInitialValue();
     this.crtObs = this.name.valueChanges.pipe(debounceTime(500)).subscribe(val => {
+
       // check input value undefined for return to filter initial state
       if (val.length === 0 || val === undefined) {
         this.filters = [];
@@ -97,12 +100,13 @@ export class FilterComponent implements OnInit, OnDestroy {
     /**
      * when user click on an option in auto complete's options, app send a request for get character by name
      */
+    if (this.filters[0].value === this.name.value) return;
+
     this.filters = [];
     this.filters.push({
       key: 'name',
       value: this.name.value
     })
-
     // dispacth SetFilters class by store
     this.setFilters();
   }

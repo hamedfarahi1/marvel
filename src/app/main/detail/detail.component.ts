@@ -24,6 +24,7 @@ export class DetailComponent implements OnInit, OnDestroy {
   saveState_: Observable<ICharacter[]>;
   item: ICharacter;
   stateObs: Subscription;
+  
   constructor(
     private store: Store<{saveState: ICharacter[]}>,
     private characterService: CharacterService) {
