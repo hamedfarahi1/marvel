@@ -1,16 +1,29 @@
 import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
-
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from '@core/interceptor/auth.interceptor'
+import { ErrorHandlerInterceptor } from '@core/interceptor/errorhandler.interceptor'
+import { BrowserModule } from '@angular/platform-browser';
+import { SharedModule } from '@shared/shared.module';
+import { MainModule } from './main/main.module';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+      SharedModule,
+      MainModule,
+      ToastrModule.forRoot(),
       ],
+      
       declarations: [
         AppComponent
       ],
+      providers:[
+
+      ]
     }).compileComponents();
   }));
 
@@ -24,12 +37,5 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app.title).toEqual('MarvelChar');
-  });
-
-  it('should render title in a h1 tag', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to MarvelChar!');
   });
 });

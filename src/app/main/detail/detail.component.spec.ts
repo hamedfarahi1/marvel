@@ -1,6 +1,16 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, fakeAsync } from '@angular/core/testing';
 
 import { DetailComponent } from './detail.component';
+import { SharedModule } from '@shared/shared.module';
+import { StoreModule } from '@ngrx/store';
+import { savingReducer } from '@core/saving-managment/save.reducer';
+import { LoadingDirective } from '@shared/shared-common/loading-directive/loading-directive';
+import { CharacterService } from '@core/service/character/character.service';
+import { HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from '@core/interceptor/auth.interceptor';
+import { ErrorHandlerInterceptor } from '@core/interceptor/errorhandler.interceptor';
+import { ToastrService } from 'ngx-toastr';
+import { EMPTY } from 'rxjs';
 
 describe('DetailComponent', () => {
   let component: DetailComponent;
@@ -8,7 +18,31 @@ describe('DetailComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DetailComponent ]
+      declarations: [ DetailComponent, LoadingDirective ],
+      imports: [
+        SharedModule,
+        StoreModule.forRoot({saveState: savingReducer})
+      ],
+      providers: [
+        {
+          provide: CharacterService,
+          deps: [ HttpClient ]
+        },
+        // add auth props into each request that sent
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: AuthInterceptor,
+			multi: true,
+    },
+    
+    // for handle error that recived from server
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: ErrorHandlerInterceptor,
+			multi: true,
+			deps: [ToastrService]
+		}
+      ]
     })
     .compileComponents();
   }));
@@ -22,4 +56,21 @@ describe('DetailComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should testing getSubStr func',fakeAsync(() => {
+    const gsu = spyOn(component, 'getShortedUrl')
+    .and.returnValue((st: string) => st.endsWith('...'))
+
+    component.getShortedUrl('jfwoiegweoigwnvueirbgeoigwheoifjwefwnioegnwefoiwvonwiegbw')
+    expect(gsu).toHaveBeenCalledTimes(1)
+  }))
+
+  it('should be test getItem func', fakeAsync(() => {
+    const gt = spyOn(component, 'getItem')
+    .and
+    .returnValue(EMPTY);
+
+    component.getItem();
+    expect(gt).toHaveBeenCalledTimes(1);
+  }))
 });

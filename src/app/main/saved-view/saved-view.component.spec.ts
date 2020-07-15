@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SavedViewComponent } from './saved-view.component';
+import { SharedModule } from '@shared/shared.module';
+import { StoreModule } from '@ngrx/store';
+import { savingReducer } from '@core/saving-managment/save.reducer';
 
 describe('SavedViewComponent', () => {
   let component: SavedViewComponent;
@@ -8,7 +11,11 @@ describe('SavedViewComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SavedViewComponent ]
+      declarations: [ SavedViewComponent ],
+      imports: [
+        SharedModule,
+        StoreModule.forRoot({saveState: savingReducer})
+      ]
     })
     .compileComponents();
   }));

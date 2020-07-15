@@ -11,6 +11,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { isPresent } from '@core/typings/optional';
 import { DialogComponent } from './dialog/dialog.component';
 import { DetailComponent } from './detail/detail.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main',
@@ -34,9 +35,10 @@ export class MainComponent implements OnInit, OnDestroy {
   resultObs: Subscription;
 
   constructor(
-    private matDialog: MatDialog,
+    public matDialog: MatDialog,
     private characterService: CharacterService, 
-    private store: Store<{state: IState}>) { 
+    private store: Store<{state: IState}>,
+    private router: Router) { 
     this.state_ = store.pipe(select('state'))
   }
 
@@ -105,5 +107,9 @@ export class MainComponent implements OnInit, OnDestroy {
       this.stateObs.unsubscribe();
     if (isPresent(this.resultObs))
       this.resultObs.unsubscribe();
+  }
+
+  onSaveItemClick() {
+    this.router.navigate(['saved-view']);
   }
 }
