@@ -148,5 +148,8 @@
       }
     }
   },
-  "defaultProject": "MarvelChar"
+  "defaultProject": "MarvelChar",
+  "cli": {
+    "analytics": false
+  }
 }
