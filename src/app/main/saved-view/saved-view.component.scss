@@ -3,14 +3,12 @@
     margin: auto;
 }
 
-.tp-card {
-    width: 400px;
-    cursor: pointer;
- }
- .tp-header-image {
-    background-size: cover;
- }
+.f-list {
+    display: flex;
+    flex-wrap: wrap;
+}
 
- .backImg {
-     width: 250px;
- }
+.child {
+    width: 33%;
+    min-width: 400px;
+}

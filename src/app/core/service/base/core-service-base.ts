@@ -17,7 +17,7 @@ import { IBaseDataContainer } from '@core/model/base/base-data-container';
  * query function create a valid request
  */
 export abstract class CoreServiceBase<T extends ModelBase, Container extends IBaseDataContainer<T>, Wrapper extends IBaseDataWrapper<T, Container>> {
-    public baseUrl:string = 'http://gateway.marvel.com/v1/public/'
+    public baseUrl:string = 'https://gateway.marvel.com/v1/public/'
 	protected constructor(protected resourceName: string, protected http: HttpClient) {
     }
     

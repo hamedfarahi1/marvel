@@ -1,12 +1,10 @@
 <h3 *ngIf="(saveState_ | async).length === 0"> no save items</h3>
 <div class="container"> 
- <mat-grid-list cols="3" rowHeight="600px" > 
-   <mat-grid-tile 
+ <div class="f-list"> 
+   <div class="child"
    *ngFor="let tile of saveState_ | async"
-   [colspan]="1"
-   [rowspan]="1"
    (click)="onItemClick(tile.id)">
    <app-card-view [item]="tile" [unsaveOption]="true" (undoSave)="unSave($event)"></app-card-view>
- </mat-grid-tile>
- </mat-grid-list>
+ </div>
+</div>
 </div>

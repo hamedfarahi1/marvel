@@ -7,13 +7,12 @@
  </mat-toolbar>
 <div class="container"> 
    <app-filter></app-filter>
-  <mat-grid-list cols="3" rowHeight="600px" > 
-    <mat-grid-tile 
+  <div class="f-list"> 
+    <div class="child"
     *ngFor="let tile of items"
-    [colspan]="1"
-    [rowspan]="1" (click)="onItemClick(tile.id)">
+    (click)="onItemClick(tile.id)">
     <app-card-view [item]="tile"></app-card-view>
-  </mat-grid-tile>
-  </mat-grid-list>
+  </div>
+</div>
 </div>
 <mat-paginator [pageIndex]="pageIndex" [length]="totalCount" [pageSize]="3" [pageSizeOptions]="[3]" (page)="setPage($event)"></mat-paginator>
