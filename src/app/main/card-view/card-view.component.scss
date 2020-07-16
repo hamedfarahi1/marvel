@@ -1,17 +1,32 @@
-.tp-card-detail {
-    max-width: 600px;
-    min-width: 250px;
-    max-height: 500px;
-    overflow-y: auto;
- }
- .tp-header-image {
-    background-size: cover;
- }
+ @media only screen and (max-width: 600px) {
+    .tp-card-detail {
+        width: 200px;
+        min-width: 250px;
+        max-height: 300px;
+        overflow-y: auto;
+
+     }
+
+ .backImg-detail {
+    width: 200px;
+}
+  }
+
+  @media only screen and (min-width: 601px) {
+    .tp-card-detail {
+        max-width: 600px;
+        min-width: 250px;
+        max-height: 500px;
+        overflow-y: auto;
+     }
 
  .backImg-detail {
     width: 300px;
 }
-
+  }
+ .tp-header-image {
+    background-size: cover;
+ }
 
 .tp-card {
     width: 75%;
